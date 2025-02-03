@@ -1,3 +1,4 @@
+# Unity Asset Tracking
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
@@ -10,3 +11,11 @@
 *.prefab filter=lfs diff=lfs merge=lfs -text
 *.unity filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
+
+# Firebase Files Tracking
+/Assets/Firebase/**/*.dll filter=lfs diff=lfs merge=lfs -text
+/Assets/Firebase/**/*.jar filter=lfs diff=lfs merge=lfs -text
+/Assets/Firebase/**/*.aar filter=lfs diff=lfs merge=lfs -text
+/Assets/Firebase/**/*.so filter=lfs diff=lfs merge=lfs -text
+/Assets/Firebase/**/*.framework filter=lfs diff=lfs merge=lfs -text
+/Assets/StreamingAssets/google-services-desktop.json filter=lfs diff=lfs merge=lfs -text
