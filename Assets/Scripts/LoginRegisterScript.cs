@@ -44,7 +44,7 @@ public class LoginRegisterScript : MonoBehaviour
                 FirebaseApp app = FirebaseApp.DefaultInstance;
 
                 // Database URL
-                app.Options.DatabaseUrl = new System.Uri("https://setup-for-login-register-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                app.Options.DatabaseUrl = new System.Uri("https://zombie-escape-unity-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
                 // Initialize FirebaseAuth and DatabaseReference
                 auth = FirebaseAuth.DefaultInstance;
