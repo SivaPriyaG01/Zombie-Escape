@@ -71,7 +71,11 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Firebase google services json files
+
+# Ignore google-services.json and its .meta file
 google-services.json
+google-services.json.meta
 GoogleService-Info.plist
+GoogleService-Info.plist.meta
+
 
