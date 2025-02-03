@@ -77,5 +77,8 @@ google-services.json
 google-services.json.meta
 GoogleService-Info.plist
 GoogleService-Info.plist.meta
+Assets/StreamingAssets/google-services-desktop.json
+Assets/StreamingAssets/google-services-desktop.json.meta
+Assets/StreamingAssets.meta
 
 
