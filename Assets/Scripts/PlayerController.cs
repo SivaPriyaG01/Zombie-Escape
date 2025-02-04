@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private InputSystem_Actions inputActions; // Reference to Input System Actions
+    private PlayerInputActions inputActions; // Reference to Input System Actions
     private Animator animatorController;
     [SerializeField] private bool groundedPlayer;
     private Vector2 moveInput;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions(); // Initialize the input system
+        inputActions = new PlayerInputActions(); // Initialize the input system
         controller = gameObject.GetComponent<CharacterController>();
         animatorController=gameObject.GetComponent<Animator>();
     }
@@ -53,43 +53,57 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
+        animatorController.SetFloat("moveX", moveInput.x, 0.1f, Time.deltaTime);
+        animatorController.SetFloat("moveZ", moveInput.y, 0.1f, Time.deltaTime);
+        animatorController.Play("Movements");
+
+
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move; // Rotate player in movement direction
+            
         }
+        
 
         // Apply gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.performed)
     {
         moveInput = context.ReadValue<Vector2>();
-        animatorController.SetFloat("Speed",playerSpeed);
-        Debug.Log("Move Input: " + moveInput);
+    }
+    else if (context.canceled)
+    {
+        moveInput = Vector2.zero;  // Reset when input stops
+    }
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-            animatorController.SetBool("Jump",true);
-            Debug.Log("Jumped!");
+            animatorController.SetTrigger("Jump");
+            animatorController.Play("Jump");
+            
         }
+        animatorController.SetBool("Jump",false);
     }
 
-    private void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Attack!");
+        
         // Add attack logic here
     }
 
-    private void OnLook(InputAction.CallbackContext context)
+    public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 lookInput = context.ReadValue<Vector2>();
-        Debug.Log("Look Input: " + lookInput);
+        
         // Implement camera movement or aiming logic here
     }
 }
