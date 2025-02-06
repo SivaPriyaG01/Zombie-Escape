@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
         animatorController.SetFloat("moveX", moveInput.x, 0.1f, Time.deltaTime);
         animatorController.SetFloat("moveZ", moveInput.y, 0.1f, Time.deltaTime);
-        animatorController.Play("Movements");
+        animatorController.Play("BasicMovements");
 
 
         if (move != Vector3.zero)
@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
             animatorController.Play("Jump");
             
         }
-        animatorController.SetBool("Jump",false);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
