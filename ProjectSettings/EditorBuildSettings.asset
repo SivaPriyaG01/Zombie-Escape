@@ -21,8 +21,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboard.unity
     guid: 1cf0609108742ba448e93875c52e12c6
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: d37c8540acd2bf54db009d8a02aa573b
+    path: Assets/Scenes/Game1.unity
+    guid: 48bf17a3981ac4049893c49be72df2c3
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: f480ec9316251c24aa047e04c7677172

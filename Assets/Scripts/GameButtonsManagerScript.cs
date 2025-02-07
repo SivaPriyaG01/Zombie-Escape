@@ -5,7 +5,7 @@ public class GameButtonsManagerScript : MonoBehaviour
 {
     public void LoadGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game1");
     }
 
     public void LoadSettings()

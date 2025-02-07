@@ -50,19 +50,20 @@ public class PlayerController : MonoBehaviour
         }
 
         // Apply movement
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y).normalized;;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        animatorController.SetFloat("moveX", moveInput.x, 0.1f, Time.deltaTime);
-        animatorController.SetFloat("moveZ", moveInput.y, 0.1f, Time.deltaTime);
-        animatorController.Play("BasicMovements");
 
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move; // Rotate player in movement direction
+        // if (move != Vector3.zero)
+        // {
+        //     gameObject.transform.forward = move; // Rotate player in movement direction
             
-        }
+        // }
+
+        if (move.magnitude > 0.1f) // Ensures rotation only when moving
+    {
+        transform.forward = Vector3.Slerp(transform.forward, move, Time.deltaTime * 10f);
+    }
         
 
         // Apply gravity
@@ -72,14 +73,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
-    {
         moveInput = context.ReadValue<Vector2>();
-    }
-    else if (context.canceled)
-    {
-        moveInput = Vector2.zero;  // Reset when input stops
-    }
+        animatorController.SetFloat("moveX", moveInput.x); //0.1f, Time.deltaTime
+        animatorController.SetFloat("moveZ", moveInput.y);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -88,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
             animatorController.SetTrigger("Jump");
-            animatorController.Play("Jump");
+            //animatorController.Play("Jump");
             
         }
     }
